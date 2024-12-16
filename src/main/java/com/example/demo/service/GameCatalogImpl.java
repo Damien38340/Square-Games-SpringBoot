@@ -1,9 +1,10 @@
-package com.example.demo;
+package com.example.demo.service;
 
-import fr.le_campus_numerique.square_games.engine.connectfour.ConnectFourGame;
+import com.example.demo.GameCatalog;
+import fr.le_campus_numerique.square_games.engine.GameFactory;
+import fr.le_campus_numerique.square_games.engine.GameStatus;
 import fr.le_campus_numerique.square_games.engine.connectfour.ConnectFourGameFactory;
 import fr.le_campus_numerique.square_games.engine.taquin.TaquinGameFactory;
-import fr.le_campus_numerique.square_games.engine.tictactoe.TicTacToeGame;
 import fr.le_campus_numerique.square_games.engine.tictactoe.TicTacToeGameFactory;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +32,23 @@ public class GameCatalogImpl implements GameCatalog {
         games.add(taquinId);
 
         return games;
+    }
+
+    public GameFactory getGameFactory(String gameId) {
+        return switch (gameId) {
+            case "tictactoe" -> ticTacToe;
+            case "connectfour" -> connectFour;
+            case "taquin" -> taquin;
+            default -> null;
+        };
+    }
+
+    public GameStatus getGameStatus(String gameStatus) {
+        return switch (gameStatus) {
+            case "SETUP": yield GameStatus.SETUP;
+            case "ONGOING": yield GameStatus.ONGOING;
+            case "TERMINATED": yield GameStatus.TERMINATED;
+            default: yield null;
+        };
     }
 }
