@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.GameCatalog;
 import fr.le_campus_numerique.square_games.engine.GameFactory;
 import fr.le_campus_numerique.square_games.engine.GameStatus;
 import fr.le_campus_numerique.square_games.engine.connectfour.ConnectFourGameFactory;
@@ -34,6 +33,7 @@ public class GameCatalogImpl implements GameCatalog {
         return games;
     }
 
+    @Override
     public GameFactory getGameFactory(String gameId) {
         return switch (gameId) {
             case "tictactoe" -> ticTacToe;
@@ -43,6 +43,7 @@ public class GameCatalogImpl implements GameCatalog {
         };
     }
 
+    @Override
     public GameStatus getGameStatus(String gameStatus) {
         return switch (gameStatus) {
             case "SETUP": yield GameStatus.SETUP;
@@ -50,5 +51,10 @@ public class GameCatalogImpl implements GameCatalog {
             case "TERMINATED": yield GameStatus.TERMINATED;
             default: yield null;
         };
+    }
+
+    @Override
+    public boolean deleteGame(String gameId) {
+        return games.remove(gameId);
     }
 }

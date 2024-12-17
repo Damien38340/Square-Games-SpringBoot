@@ -5,17 +5,15 @@ meta {
 }
 
 get {
-  url: http://localhost:8080/games?gameId=gameId
+  url: http://localhost:8080/games/tictactoe
   body: json
   auth: none
 }
 
-params:query {
-  gameId: gameId
-}
-
 body:json {
   {
-  "gameId" = "tictactoe"
+    "gameType": "tictactoe",
+    "playerCount": 2,
+    "boardSize": 3
   }
 }
