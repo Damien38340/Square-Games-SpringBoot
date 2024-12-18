@@ -9,10 +9,4 @@ public interface GameCatalog {
 
     Collection<String> getGameIdentifiers();
 
-    GameFactory getGameFactory(String gameId);
-
-
-    GameStatus getGameStatus(String gameStatus);
-
-    boolean deleteGame(String gameId);
 }

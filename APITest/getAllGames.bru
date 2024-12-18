@@ -1,0 +1,32 @@
+meta {
+  name: getAllGames
+  type: http
+  seq: 8
+}
+
+get {
+  url: http://localhost:8080/game/all
+  body: json
+  auth: none
+}
+
+body:json {
+  [
+      {
+          "gameType": "tictactoe",
+          "playerCount": 2,
+          "boardSize": 3
+      },
+      {
+          "gameType": "connectfour",
+          "playerCount": 2,
+          "boardSize": 6
+      },
+      {
+          "gameType": "taquin",
+          "playerCount": 2,
+          "boardSize": 4
+      }
+  ]
+  
+}

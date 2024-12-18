@@ -1,0 +1,35 @@
+meta {
+  name: PostGame
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8080/game
+  body: json
+  auth: none
+}
+
+body:json {
+  /*{
+    "gameType": "tictactoe",
+    "playerCount": 2,
+    "boardSize": 3
+  }
+  */
+  /*
+  {
+    "gameType": "connect4",
+    "playerCount": 2,
+    "boardSize": 7
+  }
+  */
+  
+  
+  {
+    "gameType": "15 puzzle",
+    "playerCount": 1,
+    "boardSize": 4
+  }
+  
+}
