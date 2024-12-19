@@ -10,4 +10,7 @@ public interface GamePlugin {
     @NotBlank String getName(Locale locale);
 
     @NotNull Game createGame();
+
+    String getGameType();
+
 }

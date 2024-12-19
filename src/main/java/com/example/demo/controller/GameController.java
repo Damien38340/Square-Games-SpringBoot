@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.service.GamePlugin;
 import com.example.demo.service.GameService;
 import com.example.demo.DTO.GameCreationParams;
 import fr.le_campus_numerique.square_games.engine.Game;
@@ -8,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/game")
@@ -18,8 +19,8 @@ public class GameController {
     private GameService gameService;
 
     @PostMapping
-    public ResponseEntity<String> createGame(@RequestBody GameCreationParams gameCreationParams) {
-        return ResponseEntity.ok(gameService.createGame(gameCreationParams.gameType, gameCreationParams.playerCount, gameCreationParams.boardSize));
+    public ResponseEntity<Game> createGame(@RequestBody GameCreationParams gameCreationParams) {
+        return ResponseEntity.ok(gameService.instanceGame(gameCreationParams.gameType));
     }
 
     @GetMapping("/{gameId}")
@@ -40,7 +41,7 @@ public class GameController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Collection<Game>> getAllGames() {
+    public ResponseEntity<List<GamePlugin>> getAllGames() {
         return ResponseEntity.ok(gameService.getAllGames());
     }
 

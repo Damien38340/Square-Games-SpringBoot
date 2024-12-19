@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import fr.le_campus_numerique.square_games.engine.Game;
 import fr.le_campus_numerique.square_games.engine.connectfour.ConnectFourGameFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
@@ -13,12 +14,15 @@ public class ConnectFourPlugin implements GamePlugin {
 
 
     private final ConnectFourGameFactory connectFourGame = new ConnectFourGameFactory();
-    private final MessageSource messageSource;
 
-
-    public ConnectFourPlugin(MessageSource messageSource) {
-        this.messageSource = messageSource;
+    public ConnectFourPlugin() {
+        this.gameType = "connect4";
     }
+
+    private String gameType;
+
+    @Autowired
+    private MessageSource messageSource;
 
     @Value("${game.connect4.default-player-count}")
     private int defaultPlayerCount;
@@ -36,5 +40,9 @@ public class ConnectFourPlugin implements GamePlugin {
         return connectFourGame.createGame(defaultPlayerCount, defaultBoardSize);
     }
 
+    @Override
+    public String getGameType() {
+        return gameType;
+    }
 
 }

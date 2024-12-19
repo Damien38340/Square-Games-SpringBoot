@@ -17,24 +17,4 @@ public class GameCreationParams {
         this.gameStatus = gameStatus;
     }
 
-    public String getGameType() {
-        return gameType;
-    }
-
-    public int getPlayerCount() {
-        return playerCount;
-    }
-
-    public int getBoardSize() {
-        return boardSize;
-    }
-
-    public String getGameId() {
-        return gameId;
-    }
-
-    public String getGameStatus() {
-        return gameStatus;
-    }
-
 }
