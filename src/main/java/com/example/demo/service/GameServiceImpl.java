@@ -3,21 +3,24 @@ package com.example.demo.service;
 import fr.le_campus_numerique.square_games.engine.Game;
 import fr.le_campus_numerique.square_games.engine.GameFactory;
 import fr.le_campus_numerique.square_games.engine.GameStatus;
+import fr.le_campus_numerique.square_games.engine.Token;
 import fr.le_campus_numerique.square_games.engine.connectfour.ConnectFourGameFactory;
 import fr.le_campus_numerique.square_games.engine.taquin.TaquinGameFactory;
 import fr.le_campus_numerique.square_games.engine.tictactoe.TicTacToeGameFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Stream;
 
 @Service
 public class GameServiceImpl implements GameService {
 
     private final Map<String, Game> games = new HashMap<>(); // Active games tracked by ID
     private final Map<String, GameFactory> gameFactories = new HashMap<>(); // Map game identifiers to their factories
+
+    @Autowired
+    private List<GamePlugin> gamePlugins;
 
     public GameServiceImpl(GameCatalog gameCatalog) {
         // Initialize game factories from the catalog's identifiers
@@ -64,6 +67,15 @@ public class GameServiceImpl implements GameService {
     @Override
     public Collection<Game> getAllGames(){
         return games.values();
+    }
+
+    private static Token getTokenWithName(Game game, String tokenName) {
+        return Stream.of(game.getRemainingTokens(), game.getRemovedTokens(), game.getBoard().values())
+                .flatMap(Collection::stream)
+                .filter(t -> t.getName().equals(tokenName))
+                .filter(t -> t.canMove())
+                .findFirst()
+                .orElse(null);
     }
 
 }
