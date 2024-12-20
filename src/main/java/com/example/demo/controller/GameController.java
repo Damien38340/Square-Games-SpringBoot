@@ -28,15 +28,15 @@ public class GameController {
         return ResponseEntity.ok(gameService.getGameById(gameId));
     }
 
-    @GetMapping("/status/{gameStatus}")
-    public ResponseEntity<String> getGameStatus(@PathVariable String gameStatus) {
-        GameStatus status = gameService.getGameStatus(gameStatus);
+    @GetMapping("/status/{gameId}")
+    public ResponseEntity<String> getGameStatus(@PathVariable String gameId) {
+        GameStatus status = gameService.getGameStatus(gameId);
 
         if (status != null) {
             return ResponseEntity.ok("Game status: " + status);
         } else {
             return ResponseEntity.status(400)
-                    .body("Invalid game status" + gameStatus + "Allowed values are SETUP, ONGOING, TERMINATED.");
+                    .body("Invalid game status" + gameId + "Allowed values are SETUP, ONGOING, TERMINATED.");
         }
     }
 

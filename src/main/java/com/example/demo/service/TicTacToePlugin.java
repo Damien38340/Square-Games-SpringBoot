@@ -12,7 +12,7 @@ import java.util.Locale;
 public class TicTacToePlugin implements GamePlugin {
 
     private final TicTacToeGameFactory ticTacToe = new TicTacToeGameFactory();
-    private String gameType;
+    private final String gameType;
 
     public TicTacToePlugin() {
         this.gameType = "tictactoe";

@@ -11,7 +11,7 @@ public interface GameService {
 
     Game instanceGame(String gameType);
 
-    GameStatus getGameStatus(String gameStatus);
+    GameStatus getGameStatus(String gameId);
 
     boolean deleteGame(String gameId);
 

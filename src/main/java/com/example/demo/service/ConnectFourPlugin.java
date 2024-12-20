@@ -14,12 +14,12 @@ public class ConnectFourPlugin implements GamePlugin {
 
 
     private final ConnectFourGameFactory connectFourGame = new ConnectFourGameFactory();
+    private final String gameType;
 
     public ConnectFourPlugin() {
         this.gameType = "connect4";
     }
 
-    private String gameType;
 
     @Autowired
     private MessageSource messageSource;

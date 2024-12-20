@@ -3,7 +3,6 @@ package com.example.demo.service;
 import fr.le_campus_numerique.square_games.engine.Game;
 import fr.le_campus_numerique.square_games.engine.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -12,21 +11,10 @@ import java.util.*;
 public class GameServiceImpl implements GameService {
 
 
-    @Value("${ticTacToe.name}")
-    private String tictactoeName;
-    @Value("${connect4.name}")
-    private String Connect4Name;
-    @Value("${taquin.name}")
-    private String taquinName;
-
-
     @Autowired
-    List<GamePlugin> gamePluginList;
+    private List<GamePlugin> gamePluginList;
 
-    @Override
-    public Game getGameById(String gameId) {
-        return gamePlugins.get(gameId);
-    }
+    private Map<String, Game> activeGames = new HashMap<>();
 
     @Override
     public Game instanceGame(String gameType) {
@@ -34,25 +22,34 @@ public class GameServiceImpl implements GameService {
         return gamePluginList.stream()
                 .filter(item -> item.getGameType().equals(gameType))
                 .findFirst()
-                .map(gamePlugin -> gamePlugin.createGame())
+                .map(gamePlugin -> {
+                    Game game = gamePlugin.createGame();
+                    String gameId = UUID.randomUUID().toString();
+                    activeGames.put(gameId, game);
+                    return game;
+                })
                 .orElse(null);
+    }
 
+    @Override
+    public Game getGameById(String gameId) {
+        return activeGames.get(gameId);
     }
 
     @Override
     public GameStatus getGameStatus(String gameId) {
-        Game game = gamePlugins.get(gameId);
+        Game game = activeGames.get(gameId);
         return game != null ? game.getStatus() : null;
     }
 
     @Override
     public boolean deleteGame(String gameId) {
-        return gamePlugins.remove(gameId);
+        return activeGames.remove(gameId) != null;
     }
 
     @Override
     public List<GamePlugin> getAllGames() {
-        return gamePlugins;
+        return gamePluginList;
     }
 
 //    private static Token getTokenWithName(Game game, String tokenName) {

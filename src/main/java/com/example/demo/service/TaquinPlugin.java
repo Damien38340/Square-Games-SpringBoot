@@ -12,8 +12,8 @@ import java.util.Locale;
 @Component
 public class TaquinPlugin implements GamePlugin {
 
-    private final TaquinGameFactory taquinGame = new TaquinGameFactory()
-    private String gameType;
+    private final TaquinGameFactory taquinGame = new TaquinGameFactory();
+    private final String gameType;
 
     public TaquinPlugin() {
         this.gameType = "15 puzzle";
