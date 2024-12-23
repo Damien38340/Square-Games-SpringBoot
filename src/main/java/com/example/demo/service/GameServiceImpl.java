@@ -14,37 +14,36 @@ public class GameServiceImpl implements GameService {
     @Autowired
     private List<GamePlugin> gamePluginList;
 
-    private Map<String, Game> activeGames = new HashMap<>();
+    private Map<UUID, Game> activeGames = new HashMap<>();
 
     @Override
     public Game instanceGame(String gameType) {
 
-        return gamePluginList.stream()
+        Game game = gamePluginList.stream()
                 .filter(item -> item.getGameType().equals(gameType))
+                .map(gamePlugin -> gamePlugin.createGame())
                 .findFirst()
-                .map(gamePlugin -> {
-                    Game game = gamePlugin.createGame();
-                    String gameId = UUID.randomUUID().toString();
-                    activeGames.put(gameId, game);
-                    return game;
-                })
                 .orElse(null);
+        if (game != null) {
+            activeGames.put(game.getId(), game);
+        }
+        return game;
     }
 
     @Override
     public Game getGameById(String gameId) {
-        return activeGames.get(gameId);
+        return activeGames.get(UUID.fromString(gameId));
     }
 
     @Override
     public GameStatus getGameStatus(String gameId) {
-        Game game = activeGames.get(gameId);
+        Game game = activeGames.get(UUID.fromString(gameId));
         return game != null ? game.getStatus() : null;
     }
 
     @Override
     public boolean deleteGame(String gameId) {
-        return activeGames.remove(gameId) != null;
+        return activeGames.remove(UUID.fromString(gameId)) != null;
     }
 
     @Override

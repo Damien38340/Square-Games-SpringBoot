@@ -30,7 +30,6 @@ public class TicTacToePlugin implements GamePlugin {
     private int defaultBoardSize;
 
 
-
     @Override
     public String getName(Locale locale) {
         return messageSource.getMessage("game.tictactoe.name", null, locale);
