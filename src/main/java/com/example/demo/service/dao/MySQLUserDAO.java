@@ -1,6 +1,6 @@
 package com.example.demo.service.dao;
 
-import org.apache.catalina.User;
+import com.example.demo.service.User;
 
 import java.util.List;
 
