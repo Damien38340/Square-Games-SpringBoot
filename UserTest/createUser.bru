@@ -1,0 +1,19 @@
+meta {
+  name: createUser
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8080/users
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": -1,
+    "name": "MVL",
+    "email": "ahlemalaise@chess.com"
+  }
+}
