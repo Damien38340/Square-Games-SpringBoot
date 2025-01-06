@@ -1,17 +1,19 @@
-package com.example.demo.service.dao;
+package com.example.demo.service.dao.jdbc;
 
+import com.example.demo.service.dao.GameUser;
+import com.example.demo.service.dao.GameUserDAO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
 
-@Repository
+//@Repository
 public class MySQLGameUserDAO implements GameUserDAO {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/square_games";
-    private static final String DB_USER = "testuser";
-    private static final String DB_PASSWORD = "testpassword";
+    private static final String DB_USER = "root";
+    private static final String DB_PASSWORD = "root";
 
     private Connection connection;
 

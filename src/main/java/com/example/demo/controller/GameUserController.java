@@ -1,13 +1,15 @@
 package com.example.demo.controller;
 
-import com.example.demo.DTO.GameCreationParams;
+import com.example.demo.dto.GameUserDTO;
 import com.example.demo.service.dao.GameUser;
+import com.example.demo.service.dao.GameUserDAO;
 import com.example.demo.service.dao.GameUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -22,20 +24,23 @@ public class GameUserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<GameUser> getUser(@PathVariable int userId) {
+    public ResponseEntity<Optional<GameUser>> getUser(@PathVariable int userId) {
         return ResponseEntity.ok(gameUserService.getUserById(userId));
     }
 
     @PostMapping
-    public ResponseEntity<String> addUser(@RequestBody GameUser gameUser) {
-        gameUserService.addUser(gameUser);
+    public ResponseEntity<String> addUser(@RequestBody GameUserDTO gameUser) {
+        GameUser toAdd = new GameUser();
+        toAdd.setEmail(gameUser.email());
+        toAdd.setName(gameUser.name());
+        gameUserService.addUser(toAdd);
         return ResponseEntity.ok("User added successfully");
     }
 
     @PutMapping
     public ResponseEntity<String> updateUser(@RequestBody GameUser gameUser) {
         gameUserService.updateUser(gameUser);
-        return ResponseEntity.ok("User " + gameUser.getName() + "with ID " + gameUser.getId() + " updated successfully");
+        return ResponseEntity.ok("User " + gameUser.getName() + " with ID " + gameUser.getId() + " updated successfully");
     }
 
     @DeleteMapping("/{userId}")

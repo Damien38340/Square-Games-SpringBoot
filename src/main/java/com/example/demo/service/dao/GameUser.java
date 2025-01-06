@@ -1,12 +1,21 @@
 package com.example.demo.service.dao;
 
-public class GameUser {
+import jakarta.persistence.*;
 
+@Entity // This tells Hibernate to make a table out of this class
+@Table(name="users")
+public class GameUser {
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
     private String name;
 
     private String email;
+
+    public GameUser(){
+
+    }
 
     public GameUser(Integer id, String name, String email) {
         this.id = id;

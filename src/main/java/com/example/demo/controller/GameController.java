@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.service.GamePlugin;
 import com.example.demo.service.GameService;
-import com.example.demo.DTO.GameCreationParams;
+import com.example.demo.dto.GameCreationParams;
 import fr.le_campus_numerique.square_games.engine.Game;
 import fr.le_campus_numerique.square_games.engine.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;

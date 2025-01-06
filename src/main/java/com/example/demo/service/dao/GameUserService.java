@@ -1,13 +1,16 @@
 package com.example.demo.service.dao;
 
-import java.util.List;
+import com.example.demo.dto.GameUserDTO;
 
-    public interface GameUserService {
+import java.util.List;
+import java.util.Optional;
+
+public interface GameUserService {
 
         public List<GameUser> getAllUsers();
-        public GameUser getUserById(int id);
-        public void addUser(GameUser gameUser);
-        public void updateUser(GameUser gameUser);
+        public Optional<GameUser> getUserById(int id);
+        public GameUser addUser(GameUser gameUser);
+        public GameUser updateUser(GameUser gameUser);
         public void deleteUser(int id);
     }
 
