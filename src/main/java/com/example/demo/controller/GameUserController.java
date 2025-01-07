@@ -4,6 +4,8 @@ import com.example.demo.dto.GameUserDTO;
 import com.example.demo.service.dao.GameUser;
 import com.example.demo.service.dao.GameUserDAO;
 import com.example.demo.service.dao.GameUserService;
+import jakarta.validation.constraints.NotNull;
+import org.aspectj.lang.annotation.RequiredTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +31,7 @@ public class GameUserController {
     }
 
     @PostMapping
-    public ResponseEntity<String> addUser(@RequestBody GameUserDTO gameUser) {
+    public ResponseEntity<String> addUser(@RequestBody @NotNull GameUserDTO gameUser) {
         GameUser toAdd = new GameUser();
         toAdd.setEmail(gameUser.email());
         toAdd.setName(gameUser.name());
