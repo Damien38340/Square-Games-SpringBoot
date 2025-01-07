@@ -12,14 +12,12 @@ import java.util.Locale;
 @Component
 public class ConnectFourPlugin implements GamePlugin {
 
-
     private final ConnectFourGameFactory connectFourGame = new ConnectFourGameFactory();
     private final String gameType;
 
     public ConnectFourPlugin() {
         this.gameType = "connect4";
     }
-
 
     @Autowired
     private MessageSource messageSource;
