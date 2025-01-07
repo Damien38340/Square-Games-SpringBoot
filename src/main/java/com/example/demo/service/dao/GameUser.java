@@ -1,6 +1,9 @@
 package com.example.demo.service.dao;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name="users")
@@ -9,8 +12,13 @@ public class GameUser {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
+    @NotNull(message = "Name cannot be null")
+    @NotBlank(message = "Name cannot be blank")
     private String name;
 
+    @NotNull(message = "Email cannot be null")
+    @NotBlank(message = "Email cannot be blank")
+    @Email(message = "Invalid Email")
     private String email;
 
     public GameUser(){
