@@ -1,7 +1,6 @@
 package com.example.demo.services.game;
 
-import com.example.demo.entities.GameEntity;
-import com.example.demo.entities.GameUserEntity;
+import com.example.demo.entities.*;
 import com.example.demo.plugins.GamePlugin;
 import com.example.demo.repositories.GameRepository;
 import fr.le_campus_numerique.square_games.engine.Game;
@@ -16,7 +15,9 @@ public class GameServiceImpl implements GameService {
 
     @Autowired
     private List<GamePlugin> gamePluginList;
+    @Autowired
     private GameRepository gameRepository;
+
     private Map<UUID, Game> activeGames = new HashMap<>();
 
     @Override
@@ -30,7 +31,6 @@ public class GameServiceImpl implements GameService {
         if (game != null) {
             activeGames.put(game.getId(), game);
         }
-        assert game != null;
         saveGame(game);
         return game;
     }
@@ -48,18 +48,44 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public Game getGameById(String gameId) {
+        findGameById(Integer.parseInt(gameId));
         return activeGames.get(UUID.fromString(gameId));
+    }
+
+    public void findGameById(int gameId) {
+        gameRepository.findById(gameId);
     }
 
     @Override
     public GameStatus getGameStatus(String gameId) {
         Game game = activeGames.get(UUID.fromString(gameId));
-        return game != null ? game.getStatus() : null;
+
+        if (game != null) {
+            saveGameStatus(GameStatus.valueOf(gameId));
+            return game.getStatus();
+        }
+        return null;
+    }
+
+    public void saveGameStatus(GameStatus gameStatus) {
+        GameEntity gameEntity = new GameEntity();
+
+        gameEntity.setStatus(gameStatus);
+
+        gameRepository.save(gameEntity);
     }
 
     @Override
-    public boolean deleteGame(String gameId) {
-        return activeGames.remove(UUID.fromString(gameId)) != null;
+    public Game deleteGame(String gameId) {
+        if (gameId != null) {
+            deleteGameById(Integer.parseInt(gameId));
+            return activeGames.remove(UUID.fromString(gameId));
+        }
+        return null;
+    }
+
+    public void deleteGameById(int gameId) {
+        gameRepository.deleteById(gameId);
     }
 
     @Override
@@ -68,8 +94,8 @@ public class GameServiceImpl implements GameService {
         return gamePluginList;
     }
 
-    public List<GameEntity> findAllGames() {
-        return gameRepository.findAll();
+    public void findAllGames() {
+        gameRepository.findAll();
     }
 
 

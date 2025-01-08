@@ -14,7 +14,7 @@ public interface GameService {
 
     GameStatus getGameStatus(String gameId);
 
-    boolean deleteGame(String gameId);
+    Game deleteGame(String gameId);
 
     List<GamePlugin> getAllGames();
 }

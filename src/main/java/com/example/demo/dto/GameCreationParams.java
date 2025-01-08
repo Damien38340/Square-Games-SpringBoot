@@ -1,20 +1,14 @@
 package com.example.demo.dto;
 
 
-public class GameCreationParams {
+import fr.le_campus_numerique.square_games.engine.GameStatus;
 
-    public String gameType;
-    public int playerCount;
-    public int boardSize;
-    private String gameId;
-    private String gameStatus;
+import java.util.UUID;
 
-    public GameCreationParams(String gameType, int playerCount, int boardSize, String gameId, String gameStatus) {
-        this.gameType = gameType;
-        this.playerCount = playerCount;
-        this.boardSize = boardSize;
-        this.gameId = gameId;
-        this.gameStatus = gameStatus;
-    }
+public record GameCreationParams(String gameType,
+                                 int playerCount,
+                                 int boardSize,
+                                 UUID gameId,
+                                 GameStatus gameStatus) {
 
 }

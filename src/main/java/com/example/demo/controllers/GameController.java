@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.entities.GameEntity;
 import com.example.demo.plugins.GamePlugin;
 import com.example.demo.services.game.GameService;
 import com.example.demo.dto.GameCreationParams;
@@ -20,7 +21,13 @@ public class GameController {
 
     @PostMapping
     public ResponseEntity<Game> createGame(@RequestBody GameCreationParams gameCreationParams) {
-        return ResponseEntity.ok(gameService.instanceGame(gameCreationParams.gameType));
+        GameEntity toAdd = new GameEntity();
+        toAdd.setFactoryId(gameCreationParams.gameType());
+        toAdd.setBoardSize(gameCreationParams.boardSize());
+        toAdd.setId(gameCreationParams.gameId());
+        toAdd.setStatus(gameCreationParams.gameStatus());
+
+        return ResponseEntity.ok(gameService.instanceGame(toAdd.getFactoryId()));
     }
 
     @GetMapping("/{gameId}")
@@ -47,7 +54,7 @@ public class GameController {
 
     @DeleteMapping("/{gameId}")
     public ResponseEntity<String> deleteGame(@PathVariable String gameId) {
-        if (gameService.deleteGame(gameId)) {
+        if (gameService.deleteGame(gameId) != null) {
             return ResponseEntity.ok("Game with ID " + gameId + " deleted successfully.");
         } else {
             return ResponseEntity.status(404).body("Game with ID " + gameId + " not found.");
