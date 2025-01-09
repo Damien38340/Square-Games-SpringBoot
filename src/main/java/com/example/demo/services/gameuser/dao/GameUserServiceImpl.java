@@ -26,7 +26,8 @@ public class GameUserServiceImpl implements GameUserService {
 
     @Override
     public GameUserEntity addUser(GameUserEntity gameUserEntity) {
-        return userRepository.save(gameUserEntity);
+        userRepository.save(gameUserEntity);
+        return gameUserEntity;
     }
 
     @Override
@@ -38,4 +39,5 @@ public class GameUserServiceImpl implements GameUserService {
     public void deleteUser(int id) {
         userRepository.deleteById(id);
     }
+
 }

@@ -1,7 +1,5 @@
 package com.example.demo.controllers;
 
-import com.example.demo.entities.GameEntity;
-import com.example.demo.plugins.GamePlugin;
 import com.example.demo.services.game.GameService;
 import com.example.demo.dto.GameCreationParams;
 import fr.le_campus_numerique.square_games.engine.Game;
@@ -11,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/game")
@@ -21,17 +20,16 @@ public class GameController {
 
     @PostMapping
     public ResponseEntity<Game> createGame(@RequestBody GameCreationParams gameCreationParams) {
-        GameEntity toAdd = new GameEntity();
-        toAdd.setFactoryId(gameCreationParams.gameType());
-        toAdd.setBoardSize(gameCreationParams.boardSize());
-        toAdd.setId(gameCreationParams.gameId());
-        toAdd.setStatus(gameCreationParams.gameStatus());
 
-        return ResponseEntity.ok(gameService.instanceGame(toAdd.getFactoryId()));
+        return ResponseEntity.ok(gameService.instanceGame(gameCreationParams.gameType()));
     }
 
     @GetMapping("/{gameId}")
     public ResponseEntity<Game> getGame(@PathVariable String gameId) {
+        if (gameService.getGameById(gameId) == null) {
+            ResponseEntity.ok("Game with ID " + gameId + " not found");
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(gameService.getGameById(gameId));
     }
 
@@ -43,12 +41,12 @@ public class GameController {
             return ResponseEntity.ok("Game status: " + status);
         } else {
             return ResponseEntity.status(400)
-                    .body("Invalid game status" + gameId + "Allowed values are SETUP, ONGOING, TERMINATED.");
+                    .body("Game with ID " + gameId + " not found");
         }
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<GamePlugin>> getAllGames() {
+    public ResponseEntity<List<Map<String, Object>>> getAllGames() {
         return ResponseEntity.ok(gameService.getAllGames());
     }
 

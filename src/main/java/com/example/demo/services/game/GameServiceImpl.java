@@ -30,30 +30,23 @@ public class GameServiceImpl implements GameService {
                 .orElse(null);
         if (game != null) {
             activeGames.put(game.getId(), game);
+            GameEntity gameEntity = new GameEntity();
+
+            gameEntity.setId(game.getId().toString());
+            gameEntity.setFactoryId(game.getFactoryId());
+            gameEntity.setBoardSize(game.getBoardSize());
+            gameEntity.setStatus(game.getStatus());
+
+            gameRepository.save(gameEntity);
         }
-        saveGame(game);
         return game;
     }
 
-    public void saveGame(Game game) {
-        GameEntity gameEntity = new GameEntity();
-
-        gameEntity.setId(game.getId());
-        gameEntity.setFactoryId(game.getFactoryId());
-        gameEntity.setBoardSize(game.getBoardSize());
-        gameEntity.setStatus(game.getStatus());
-
-        gameRepository.save(gameEntity);
-    }
 
     @Override
     public Game getGameById(String gameId) {
-        findGameById(Integer.parseInt(gameId));
-        return activeGames.get(UUID.fromString(gameId));
-    }
-
-    public void findGameById(int gameId) {
         gameRepository.findById(gameId);
+        return activeGames.get(UUID.fromString(gameId));
     }
 
     @Override
@@ -61,41 +54,35 @@ public class GameServiceImpl implements GameService {
         Game game = activeGames.get(UUID.fromString(gameId));
 
         if (game != null) {
-            saveGameStatus(GameStatus.valueOf(gameId));
+            gameRepository.findById(gameId);
             return game.getStatus();
         }
         return null;
     }
 
-    public void saveGameStatus(GameStatus gameStatus) {
-        GameEntity gameEntity = new GameEntity();
-
-        gameEntity.setStatus(gameStatus);
-
-        gameRepository.save(gameEntity);
-    }
 
     @Override
     public Game deleteGame(String gameId) {
-        if (gameId != null) {
-            deleteGameById(Integer.parseInt(gameId));
+        if (activeGames.containsKey(UUID.fromString(gameId))) {
+            gameRepository.deleteById(gameId);
             return activeGames.remove(UUID.fromString(gameId));
         }
         return null;
     }
 
-    public void deleteGameById(int gameId) {
-        gameRepository.deleteById(gameId);
-    }
-
     @Override
-    public List<GamePlugin> getAllGames() {
-        findAllGames();
-        return gamePluginList;
-    }
+    public List<Map<String, Object>> getAllGames() {
+        // Fetch all games from the repository
+        List<GameEntity> gameEntities = gameRepository.findAll();
 
-    public void findAllGames() {
-        gameRepository.findAll();
+        // Map GameEntity to a response object containing ID and game details
+        return gameEntities.stream().map(gameEntity -> {
+            Map<String, Object> gameInfo = new HashMap<>();
+            gameInfo.put("id", gameEntity.getId());
+            gameInfo.put("type", gameEntity.getFactoryId());
+            gameInfo.put("status", gameEntity.getStatus());
+            return gameInfo;
+        }).toList();
     }
 
 

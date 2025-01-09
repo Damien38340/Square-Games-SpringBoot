@@ -1,11 +1,11 @@
 meta {
-  name: DeleteGame
+  name: getStatus
   type: http
-  seq: 6
+  seq: 5
 }
 
-delete {
-  url: http://localhost:8080/game/73d8fcc8-ae67-4c36-961e-62f581d4227a
+get {
+  url: http://localhost:8080/game/status/5f680e4b-b61f-4892-8174-7ea664191ed3
   body: json
   auth: none
 }

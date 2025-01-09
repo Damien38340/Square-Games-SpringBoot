@@ -5,15 +5,13 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "games")
 public class GameEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private String id;
 
     @NotNull
     private String factoryId;
@@ -27,11 +25,11 @@ public class GameEntity {
     @JoinColumn(name = "player_id")
     private Set<PlayerEntity> playerEntity;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
     public String getFactoryId() {
