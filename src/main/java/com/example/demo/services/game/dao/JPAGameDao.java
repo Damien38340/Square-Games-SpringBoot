@@ -61,6 +61,7 @@ public class JPAGameDao implements GameDAO {
         GameEntity gameEntity = optionalGameEntity.get();
 
         GamePlugin gamePlugin;
+        GameFactory gameFactory;
 
         int boardSize = gameEntity.getBoardSize();
 

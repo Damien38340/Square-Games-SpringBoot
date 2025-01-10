@@ -1,7 +1,6 @@
 package com.example.demo.services.game;
 
 import com.example.demo.dto.GamePositionDTO;
-import com.example.demo.entities.*;
 import com.example.demo.plugins.GamePlugin;
 import com.example.demo.services.game.dao.JPAGameDao;
 import fr.le_campus_numerique.square_games.engine.*;
