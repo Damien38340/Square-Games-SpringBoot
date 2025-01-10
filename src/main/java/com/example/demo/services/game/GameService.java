@@ -1,17 +1,18 @@
 package com.example.demo.services.game;
 
-import com.example.demo.plugins.GamePlugin;
-import fr.le_campus_numerique.square_games.engine.Game;
-import fr.le_campus_numerique.square_games.engine.GameStatus;
+import com.example.demo.dto.GamePositionDTO;
+import com.example.demo.entities.GameEntity;
+import fr.le_campus_numerique.square_games.engine.*;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface GameService {
 
-    Game getGameById(String gameId);
+    Optional<Game> getGameById(String gameId);
 
     @Transactional
     Game instanceGame(String gameType);
@@ -19,7 +20,12 @@ public interface GameService {
     GameStatus getGameStatus(String gameId);
 
     @Transactional
-    Game deleteGame(String gameId);
+    String deleteGame(String gameId);
 
-    List<Map<String, Object>> getAllGames();
+    List<Game> getAllGames();
+
+    void getTokenWithName(String game, String tokenName);
+
+    void moveTo(Token token, GamePositionDTO position) throws InvalidPositionException;
+
 }

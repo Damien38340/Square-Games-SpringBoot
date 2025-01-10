@@ -3,11 +3,11 @@ package com.example.demo.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="tokens")
+@Table(name = "tokens")
 public class TokenEntity {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String tokenName;
 
@@ -15,31 +15,67 @@ public class TokenEntity {
 
     private int coordinateY;
 
-    private boolean isPlayed;
+    public String ownerId;
 
-    @ManyToOne
-    @JoinColumn(name = "player_id")
-    private PlayerEntity playerEntity;
+    public boolean removed;
 
-    @ManyToOne
-    @JoinColumn(name = "game_id")
-    private GameEntity gameEntity;
+    private boolean played;
 
-    public GameEntity getGame() {
-        return gameEntity;
+
+    public Long getId() {
+        return id;
     }
 
-    public void setGame(GameEntity gameEntity) {
-        this.gameEntity = gameEntity;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public PlayerEntity getPlayer() {
-        return playerEntity;
+    public String getTokenName() {
+        return tokenName;
     }
 
-    public void setPlayer(PlayerEntity playerEntity) {
-        this.playerEntity = playerEntity;
+    public void setTokenName(String tokenName) {
+        this.tokenName = tokenName;
     }
 
+    public int getCoordinateX() {
+        return coordinateX;
+    }
+
+    public void setCoordinateX(int coordinateX) {
+        this.coordinateX = coordinateX;
+    }
+
+    public int getCoordinateY() {
+        return coordinateY;
+    }
+
+    public void setCoordinateY(int coordinateY) {
+        this.coordinateY = coordinateY;
+    }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public boolean isRemoved() {
+        return removed;
+    }
+
+    public void setRemoved(boolean removed) {
+        this.removed = removed;
+    }
+
+    public boolean isPlayed() {
+        return played;
+    }
+
+    public void setPlayed(boolean played) {
+        this.played = played;
+    }
 
 }

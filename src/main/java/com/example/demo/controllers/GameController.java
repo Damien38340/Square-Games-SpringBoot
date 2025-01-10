@@ -1,5 +1,7 @@
 package com.example.demo.controllers;
 
+import com.example.demo.dto.GamePositionDTO;
+import com.example.demo.entities.GameEntity;
 import com.example.demo.services.game.GameService;
 import com.example.demo.dto.GameCreationParams;
 import fr.le_campus_numerique.square_games.engine.Game;
@@ -9,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/game")
@@ -25,7 +27,7 @@ public class GameController {
     }
 
     @GetMapping("/{gameId}")
-    public ResponseEntity<Game> getGame(@PathVariable String gameId) {
+    public ResponseEntity<Optional<Game>> getGame(@PathVariable String gameId) {
         if (gameService.getGameById(gameId) == null) {
             ResponseEntity.ok("Game with ID " + gameId + " not found");
             return ResponseEntity.notFound().build();
@@ -46,7 +48,7 @@ public class GameController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Map<String, Object>>> getAllGames() {
+        public ResponseEntity<List<Game>> getAllGames() {
         return ResponseEntity.ok(gameService.getAllGames());
     }
 
@@ -57,6 +59,12 @@ public class GameController {
         } else {
             return ResponseEntity.status(404).body("Game with ID " + gameId + " not found.");
         }
+    }
+
+    @PutMapping("/{gameId}/tokens/{tokenName}/position")
+    public ResponseEntity<String> setTokenPosition(@RequestBody GamePositionDTO positionDTO, @PathVariable String gameId, @PathVariable String tokenName) {
+        gameService.getTokenWithName(gameId, tokenName);
+        return ResponseEntity.ok("Token " + tokenName + " from " + gameId + " has been moved to " + positionDTO);
     }
 
 }

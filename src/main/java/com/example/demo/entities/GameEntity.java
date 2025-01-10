@@ -3,7 +3,9 @@ package com.example.demo.entities;
 import fr.le_campus_numerique.square_games.engine.GameStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,14 +18,31 @@ public class GameEntity {
     @NotNull
     private String factoryId;
 
-    @NotNull
+    @Positive
     private int boardSize;
 
     private GameStatus status;
 
-    @OneToMany
-    @JoinColumn(name = "player_id")
-    private Set<PlayerEntity> playerEntity;
+    public String playerIds;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    public List<TokenEntity> tokens;
+
+    public String getPlayerIds() {
+        return playerIds;
+    }
+
+    public List<TokenEntity> getTokens() {
+        return tokens;
+    }
+
+    public void setTokens(List<TokenEntity> tokens) {
+        this.tokens = tokens;
+    }
+
+    public void setPlayerIds(String playerIds) {
+        this.playerIds = playerIds;
+    }
 
     public String getId() {
         return id;
@@ -54,22 +73,6 @@ public class GameEntity {
 
     public void setStatus(GameStatus status) {
         this.status = status;
-    }
-
-    public Set<PlayerEntity> getPlayerEntity() {
-        return playerEntity;
-    }
-
-    public void setPlayerEntity(Set<PlayerEntity> playerEntity) {
-        this.playerEntity = playerEntity;
-    }
-
-    public Set<PlayerEntity> getPlayer() {
-        return playerEntity;
-    }
-
-    public void setPlayer(Set<PlayerEntity> playerEntity) {
-        this.playerEntity = playerEntity;
     }
 
 }
