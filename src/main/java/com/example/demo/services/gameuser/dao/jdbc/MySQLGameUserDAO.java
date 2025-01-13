@@ -68,7 +68,7 @@ public class MySQLGameUserDAO implements GameUserDAO {
     public void addUser(GameUserEntity gameUserEntity) {
         String query = "INSERT INTO USERS (name, email) VALUES (?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, gameUserEntity.getName());
+            stmt.setString(1, gameUserEntity.getUsername());
             stmt.setString(2, gameUserEntity.getEmail());
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -80,7 +80,7 @@ public class MySQLGameUserDAO implements GameUserDAO {
     public void updateUser(GameUserEntity gameUserEntity) {
         String query = "UPDATE USERS SET name = ?, email = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, gameUserEntity.getName());
+            stmt.setString(1, gameUserEntity.getUsername());
             stmt.setString(2, gameUserEntity.getEmail());
             stmt.setInt(3, gameUserEntity.getId());
             stmt.executeUpdate();

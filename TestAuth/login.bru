@@ -1,0 +1,20 @@
+meta {
+  name: login
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/auth/login?username=user&password=user123
+  body: json
+  auth: bearer
+}
+
+params:query {
+  username: user
+  password: user123
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNzM2Nzc5NTU3LCJleHAiOjE3MzY3ODMxNTd9.M96qNel7JqrqL6WN8IUW7tKCkZ5IbBlt_VM3AjPOMHo
+}

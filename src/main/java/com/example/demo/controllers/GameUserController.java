@@ -37,7 +37,7 @@ public class GameUserController {
     public ResponseEntity<String> addUser(@RequestBody @Valid GameUserDTO gameUser) {
         GameUserEntity toAdd = new GameUserEntity();
         toAdd.setEmail(gameUser.email());
-        toAdd.setName(gameUser.name());
+        toAdd.setUsername(gameUser.name());
         gameUserService.addUser(toAdd);
         return ResponseEntity.ok("User added successfully");
     }
@@ -45,7 +45,7 @@ public class GameUserController {
     @PutMapping
     public ResponseEntity<String> updateUser(@RequestBody @Valid GameUserEntity gameUserEntity) {
         gameUserService.updateUser(gameUserEntity);
-        return ResponseEntity.ok("User " + gameUserEntity.getName() + " with ID " + gameUserEntity.getId() + " updated successfully");
+        return ResponseEntity.ok("User " + gameUserEntity.getUsername() + " with ID " + gameUserEntity.getId() + " updated successfully");
     }
 
     @DeleteMapping("/{userId}")
