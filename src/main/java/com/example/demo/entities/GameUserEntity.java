@@ -14,19 +14,22 @@ public class GameUserEntity {
 
     @NotNull(message = "Name cannot be null")
     @NotBlank(message = "Name cannot be blank")
+    @Column(unique = true)
     private String username;
 
-    @NotNull(message = "Email cannot be null")
-    @NotBlank(message = "Email cannot be blank")
-    @Email(message = "Invalid Email")
+//    @NotNull(message = "Email cannot be null")
+//    @NotBlank(message = "Email cannot be blank")
+//    @Email(message = "Invalid Email")
     private String email;
 
     @NotNull(message = "Password cannot be null")
     @NotBlank(message = "Password cannot be blank")
+    @Column
     private String password;
 
     @NotNull
     @NotBlank
+    @Column
     private String role;
 
     public GameUserEntity() {

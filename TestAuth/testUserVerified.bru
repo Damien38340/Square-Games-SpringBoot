@@ -1,0 +1,15 @@
+meta {
+  name: testUserVerified
+  type: http
+  seq: 7
+}
+
+get {
+  url: http://localhost:8080/test/user/verified
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNzM2ODUyMTgxLCJleHAiOjE3MzY4NTU3ODF9.qBAaaypmrIOU26dJeDWbHEm0WxTC6l6e_RRXVwSawPs
+}
