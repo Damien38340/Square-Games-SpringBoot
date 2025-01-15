@@ -21,7 +21,7 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
-    @GetMapping
+    @GetMapping("/homepage")
     public String accessGamePage(Authentication authentication) {
         if (authentication != null) {
             return "Welcome to the Game, " + authentication.getName() + "!";
