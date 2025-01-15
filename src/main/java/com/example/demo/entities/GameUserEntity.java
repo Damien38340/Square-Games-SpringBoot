@@ -17,9 +17,9 @@ public class GameUserEntity {
     @Column(unique = true)
     private String username;
 
-//    @NotNull(message = "Email cannot be null")
-//    @NotBlank(message = "Email cannot be blank")
-//    @Email(message = "Invalid Email")
+    @NotNull(message = "Email cannot be null")
+    @NotBlank(message = "Email cannot be blank")
+    @Email(message = "Invalid Email")
     private String email;
 
     @NotNull(message = "Password cannot be null")
@@ -32,14 +32,19 @@ public class GameUserEntity {
     @Column
     private String role;
 
+    @Column
+    private String token;
+
     public GameUserEntity() {
 
     }
 
-    public GameUserEntity(Integer id, String username, String email) {
+    public GameUserEntity(Integer id, String username, String email, String password, String role) {
         this.id = id;
         this.username = username;
         this.email = email;
+        this.password = password;
+        this.role = role;
     }
 
     public Integer getId() {
@@ -80,5 +85,13 @@ public class GameUserEntity {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

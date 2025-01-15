@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface GameUserService {
 
         public List<GameUserEntity> getAllUsers();
-        public Optional<GameUserEntity> getUserById(int id);
+        Optional<GameUserEntity> getUserByName(String username);
         public GameUserEntity addUser(GameUserEntity gameUserEntity);
         public GameUserEntity updateUser(GameUserEntity gameUserEntity);
         public void deleteUser(int id);

@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -28,9 +29,9 @@ public class GameUserController {
         return ResponseEntity.ok(gameUserService.getAllUsers());
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<Optional<GameUserEntity>> getUser(@PathVariable int userId) {
-        return ResponseEntity.ok(gameUserService.getUserById(userId));
+    @GetMapping("/{username}")
+    public ResponseEntity<Optional<GameUserEntity>> getUser(@PathVariable String username) {
+        return ResponseEntity.ok(gameUserService.getUserByName(username));
     }
 
     @PostMapping

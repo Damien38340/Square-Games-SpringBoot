@@ -8,6 +8,7 @@ import fr.le_campus_numerique.square_games.engine.Game;
 import fr.le_campus_numerique.square_games.engine.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,15 @@ public class GameController {
 
     @Autowired
     private GameService gameService;
+
+    @GetMapping
+    public String accessGamePage(Authentication authentication) {
+        if (authentication != null) {
+            return "Welcome to the Game, " + authentication.getName() + "!";
+        } else {
+            return "Unauthorized access.";
+        }
+    }
 
     @PostMapping
     public ResponseEntity<Game> createGame(@RequestBody GameCreationParams gameCreationParams) {
@@ -48,7 +58,7 @@ public class GameController {
     }
 
     @GetMapping("/all")
-        public ResponseEntity<List<Game>> getAllGames() {
+    public ResponseEntity<List<Game>> getAllGames() {
         return ResponseEntity.ok(gameService.getAllGames());
     }
 
