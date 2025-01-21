@@ -16,6 +16,9 @@ WORKDIR /Square-Games-SpringBoot
 COPY pom.xml .
 COPY settings.xml /root/.m2/
 
+## It is necessary to add the settings.xml file to the root of the project to make it work
+##
+
 RUN mvn dependency:resolve
 
 # Copier le reste des fichiers sources et construire l'application
