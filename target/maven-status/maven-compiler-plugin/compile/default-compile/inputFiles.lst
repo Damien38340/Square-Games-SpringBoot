@@ -2,12 +2,19 @@
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/StreamExample.java
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/configurations/ConfigurationH2MySQL.java
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/configurations/MessageSourceConfig.java
+/home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/configurations/SecurityConfig.java
+/home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/configurations/SecurityConfigBuilder.java
+/home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/controllers/AuthController.java
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/controllers/GameCatalogController.java
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/controllers/GameController.java
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/controllers/GameUserController.java
+/home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/controllers/TestController.java
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/dto/GameCreationParams.java
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/dto/GamePositionDTO.java
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/dto/GameUserDTO.java
+/home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/dto/TokenDTO.java
+/home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/dto/UserCredentialsDTO.java
+/home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/dto/UserGameCreationParams.java
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/entities/GameEntity.java
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/entities/GameUserEntity.java
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/entities/TokenEntity.java
@@ -25,6 +32,7 @@
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/repositories/GameRepository.java
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/repositories/TokenRepository.java
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/repositories/UserRepository.java
+/home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/services/CustomUserDetailsService.java
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/services/game/GameCatalog.java
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/services/game/GameCatalogImpl.java
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/services/game/GameService.java
@@ -35,3 +43,5 @@
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/services/gameuser/dao/GameUserService.java
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/services/gameuser/dao/GameUserServiceImpl.java
 /home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/services/gameuser/dao/jdbc/MySQLGameUserDAO.java
+/home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/util/JwtFilter.java
+/home/damien.lobato@Digital-Grenoble.local/Documents/Square-Games-SpringBoot/src/main/java/com/example/demo/util/JwtUtil.java
